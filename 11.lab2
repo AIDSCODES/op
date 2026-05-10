@@ -1,0 +1,174 @@
+import java.util.Scanner;
+
+class P4 {
+
+    int id;
+    String name;
+    int issue;
+
+    static int total = 0;
+
+    P4(int id, String name) {
+
+        this.id = id;
+        this.name = name;
+        issue = 0;
+        total++;
+    }
+
+    void display() {
+
+        if (issue == 0) {
+            System.out.println("Book Id: " + id +
+                    "\tName: " + name +
+                    "\tStatus: Available");
+        }
+        else {
+            System.out.println("Book Id: " + id +
+                    "\tName: " + name +
+                    "\tStatus: Issued");
+        }
+    }
+
+    void issueBook() {
+
+        if (issue == 0) {
+
+            issue = 1;
+            System.out.println("Book Issued Successfully");
+        }
+        else {
+
+            System.out.println("Book Already Issued");
+        }
+    }
+
+    void returnBook() {
+
+        if (issue == 1) {
+
+            issue = 0;
+            System.out.println("Book Returned Successfully");
+        }
+        else {
+
+            System.out.println("Book is already available");
+        }
+    }
+
+    static void totalBooks() {
+
+        System.out.println("Total Books: " + total);
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        P4[] arr = new P4[10];
+
+        int ch, id, n = 0;
+        String name;
+
+        while (true) {
+
+            System.out.println("\n1.Add Book");
+            System.out.println("2.View Books");
+            System.out.println("3.Issue Book");
+            System.out.println("4.Return Book");
+            System.out.println("5.Total Books");
+            System.out.println("6.Exit");
+
+            System.out.print("Enter Choice: ");
+            ch = sc.nextInt();
+
+            switch (ch) {
+
+                case 1:
+
+                    System.out.print("Enter Book Id: ");
+                    id = sc.nextInt();
+
+                    System.out.print("Enter Book Name: ");
+                    name = sc.next();
+
+                    arr[n] = new P4(id, name);
+                    n++;
+
+                    System.out.println("Book Added Successfully");
+
+                    break;
+
+                case 2:
+
+                    for (P4 x : arr) {
+
+                        if (x != null) {
+
+                            x.display();
+                        }
+                    }
+
+                    break;
+
+                case 3:
+
+                    System.out.print("Enter Book Id: ");
+                    id = sc.nextInt();
+
+                    int f1 = 0;
+
+                    for (P4 x : arr) {
+
+                        if (x != null && x.id == id) {
+
+                            x.issueBook();
+                            f1 = 1;
+                            break;
+                        }
+                    }
+
+                    if (f1 == 0) {
+
+                        System.out.println("Invalid Book Id");
+                    }
+
+                    break;
+
+                case 4:
+
+                    System.out.print("Enter Book Id: ");
+                    id = sc.nextInt();
+
+                    int f2 = 0;
+
+                    for (P4 x : arr) {
+
+                        if (x != null && x.id == id) {
+
+                            x.returnBook();
+                            f2 = 1;
+                            break;
+                        }
+                    }
+
+                    if (f2 == 0) {
+
+                        System.out.println("Invalid Book Id");
+                    }
+
+                    break;
+
+                case 5:
+
+                    P4.totalBooks();
+
+                    break;
+
+                case 6:
+
+                    System.exit(0);
+            }
+        }
+    }
+}
