@@ -1,0 +1,98 @@
+import java.util.Scanner;
+
+class Book
+{
+    String bookname;
+    String Author;
+    Boolean isIssued;
+
+    static int totalBooks = 0;
+
+    public Book (String bookname, String Author)
+    {
+        this.bookname= bookname;
+        this.Author= Author;
+        this.isIssued = false;
+        totalBooks++;
+    }
+
+    void displayBook()
+    {
+        System.out.println("Book Name : " + bookname);
+        System.out.println("Author    : " + Author);
+    }
+
+    void issueBook()
+    {
+        if (!isIssued)
+        {
+            isIssued = true;
+            System.out.println("Book issued successfully!");
+        }
+        else
+        {
+            System.out.println("Book already issued!");
+        }
+    }
+
+    void returnBook()
+    {
+        if (isIssued)
+        {
+            isIssued = false;
+            System.out.println("Book returned successfully!");
+        }
+        else
+        {
+            System.out.println("Book was not issued!");
+        }
+    }
+
+
+        public static void main(String[] args)
+        {
+
+            Scanner sc = new Scanner(System.in);
+
+
+            Book b1 = new Book("Wings Of Fire", "DR.APJ Abdul Kalam");
+
+            int choice;
+
+            do {
+                System.out.println("\n***** LIBRARY MANAGEMENT SYSTEM ****");
+                System.out.println("1. Display Books");
+                System.out.println("2. Issue Book ");
+                System.out.println("3. Return Book ");
+                System.out.println("4. Exit");
+                System.out.print("Enter choice: ");
+                choice = sc.nextInt();
+
+                switch (choice)
+                {
+                    case 1:
+                        b1.displayBook();
+
+                        break;
+
+                    case 2:
+                        b1.issueBook();
+                        break;
+
+                    case 3:
+                        b1.returnBook();
+                        break;
+
+                    case 4:
+                        System.out.println("Thank You!");
+                        break;
+
+                    default:
+                        System.out.println("Invalid Choice!");
+                }
+
+            } while (choice != 4);
+
+            sc.close();
+        }
+    }
